@@ -28,7 +28,7 @@ namespace simpleFFT
             Complex[] complex_source = new Complex[_tmpsource.Length];
             for (int i = 0; i < _tmpsource.Length; i++)
             {
-                complex_source[i] = new Complex(i);
+                complex_source[i] = new Complex(_tmpsource[i]);
             }
             return simple_fft(complex_source);
         }
