@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 namespace simpleFFT
 {
 	class MainClass
@@ -37,14 +38,18 @@ namespace simpleFFT
         }
 		public static void Main (string[] args)
 		{
-            //List<double> source = new List<double>();
-            //Random rand = new Random();
-            //for (int i = 0; i < 16; i++)
-            //    source.Add(rand.Next());
-			double[] source = { 1, 2, 3, 4, 5, 6, 7,8};
-            testRight(source);
-           // Console.WriteLine("{0}ms", testdft(source.ToArray()));
-            //Console.WriteLine("{0}ms", testfft(source.ToArray()));
+            for (int j = 0; j < 20; j++)
+            {
+                Console.Write("start {0}: ", Math.Pow(2, j));
+                List<double> source = new List<double>();
+                Random rand = new Random();
+                for (int i = 0; i < Math.Pow(2,j); i++)
+                    source.Add(rand.Next());
+                //double[] source = { 1, 2, 3, 4, 5, 6, 7,8};
+                //testRight(source);
+                Console.Write("{0}ms ", testdft(source.ToArray()));
+                Console.WriteLine("{0}ms", testfft(source.ToArray()));
+            }
             Console.ReadKey();
 		}
 	}

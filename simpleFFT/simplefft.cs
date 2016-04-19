@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 namespace simpleFFT
 {
     public class simplefft
@@ -18,17 +19,14 @@ namespace simpleFFT
         }
         private Complex w(double x, int k)
         {
-            var _2piux = 2 * Math.PI * x / k;
-            var _sinux = Math.Sin(_2piux);
-            var _cosux = Math.Cos(_2piux);
-            return new Complex(_cosux, -_sinux);
+            return Complex.Exp(new Complex(0, -2 * Math.PI * x / k));
         }
         public Complex[] simple_fft(double[] _tmpsource)
         {
             Complex[] complex_source = new Complex[_tmpsource.Length];
             for (int i = 0; i < _tmpsource.Length; i++)
             {
-                complex_source[i] = new Complex(_tmpsource[i]);
+                complex_source[i] = new Complex(_tmpsource[i], 0);
             }
             return simple_fft(complex_source);
         }
