@@ -6,7 +6,7 @@ namespace simpleFFT
     {
         private double[] _source;
         private int _sourcelen;
-        public Complex low_ft(int index, bool normalized = false)
+        public Complex low_ft(int index, bool normalized = true)
         {
             Complex complex = new Complex();
             for (int i = 0; i < _sourcelen; i++)
@@ -65,6 +65,10 @@ namespace simpleFFT
                 }
                 return ret;
             }
+        }
+        public simplefft()
+        {
+
         }
         public simplefft(double[] source)
         {
