@@ -15,6 +15,7 @@ namespace simpleFFT
 			var ret = fft.simple_fft (source);
 			foreach (var t in ret)
 				Console.WriteLine (t.ToString ());
+            Console.ReadKey();
 		}
 	}
 }
