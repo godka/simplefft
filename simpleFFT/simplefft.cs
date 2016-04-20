@@ -17,6 +17,16 @@ namespace simpleFFT
             else
                 return complex;
         }
+        public Complex high_ft(int index, bool normalized = true)
+        {
+            Complex complex = new Complex();
+            for (int i = 0; i < _sourcelen; i++)
+                complex += w(index * i, _sourcelen) * _source[i];
+            if (normalized)
+                return complex / _sourcelen;
+            else
+                return complex;
+        }
         private Complex w(double x, int k)
         {
             return Complex.Exp(new Complex(0, -2 * Math.PI * x / k));

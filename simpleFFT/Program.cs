@@ -17,9 +17,18 @@ namespace simpleFFT
         {
             var t1 = Environment.TickCount;
             simplefft fft = new simplefft(source);
-            Console.Write("dft:");
+            Console.Write("dft-single:");
             for (int i = 0; i < source.Length; i++)
                 fft.low_ft(i);
+            return Environment.TickCount - t1;
+        }
+        public static int testdft2(double[] source)
+        {
+            var t1 = Environment.TickCount;
+            simplefft fft = new simplefft(source);
+            Console.Write("dft-parallel:");
+
+            System.Threading.Tasks.Parallel.For(0, source.Length, (i) => { fft.low_ft(i); });
             return Environment.TickCount - t1;
         }
         public static void testRight(double[] source)
@@ -38,16 +47,15 @@ namespace simpleFFT
         }
 		public static void Main (string[] args)
 		{
-            for (int j = 0; j < 20; j++)
+            for (int j = 6; j < 20; j++)
             {
                 Console.Write("start {0}: ", Math.Pow(2, j));
                 List<double> source = new List<double>();
                 Random rand = new Random();
                 for (int i = 0; i < Math.Pow(2,j); i++)
                     source.Add(rand.Next());
-                //double[] source = { 1, 2, 3, 4, 5, 6, 7,8};
-                //testRight(source);
-                Console.Write("{0}ms ", testdft(source.ToArray()));
+                //Console.Write("{0}ms ", testdft(source.ToArray()));
+                Console.Write("{0}ms ", testdft2(source.ToArray()));
                 Console.WriteLine("{0}ms", testfft(source.ToArray()));
             }
             Console.ReadKey();
